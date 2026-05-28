@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TaskQuest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+    <string name="smaller_rewards_txt">Smaller rewards (200-500 pts) keep\nmomentum high between big milestones.</string>
+    <string name="default_web_client_id">268370175580-ag69ifqrei24umhalbodsgulaur43tn6.apps.googleusercontent.com</string>
+</resources>

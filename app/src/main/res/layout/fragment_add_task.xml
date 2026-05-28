@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    tools:context=".fragments.AddTaskFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/orange_defaulte"
+                android:textStyle="bold"
+                android:textSize="32dp"
+                android:text="Create Task" />'
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/dark_yello"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="Define your objective and the prize that
+awaits you." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TASK TITLE"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_orange"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="16dp"
+                    android:hint="e.g., Hit the Gym"
+                    android:id="@+id/etTitle"
+                    android:background="@drawable/edittext_background"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5"
+                    android:layout_marginTop="24dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="POINTS"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/dark_orange"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="4dp"
+                        android:paddingVertical="16dp"
+                        android:layout_marginEnd="8sp"
+                        android:paddingHorizontal="16dp"
+                        android:hint="30"
+                        android:id="@+id/etPoints"
+                        android:textColorHint="#6B7280"
+                        android:background="@drawable/edittext_background"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="24dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CATEGORY"
+                        android:layout_marginStart="8sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/dark_orange"
+                        />
+                    <Spinner
+                        android:id="@+id/spinnerTaskType"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="40dp"
+                        android:background="@drawable/spinner_background"
+                        android:spinnerMode="dropdown" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REWARD DESCRIPTION"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_orange"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="16dp"
+                    android:gravity="top|start"
+                    android:id="@+id/etReward"
+                    android:hint="e.g., Relax in sauna for 20 minutes"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textMultiLine"
+                    android:minLines="4" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:padding="16dp"
+                android:background="@drawable/edittext_background"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/calendar"
+                    android:id="@+id/icon_calender"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DAILY TASK"
+                    android:layout_toEndOf="@+id/icon_calender"
+                    android:id="@+id/text_daily"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Resets every 24 hours"
+                    android:layout_below="@+id/text_daily"
+                    android:layout_toEndOf="@+id/icon_calender"
+                    />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchDailyTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_alignParentEnd="true"
+                    android:thumb="@drawable/thumb_layerlist"
+                    app:showText="false"
+                    app:thumbTint="@null"
+                    app:trackTint="@null"
+                    app:track="@drawable/toggle_track" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:padding="16dp"
+                android:id="@+id/btnSaveTask"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/gradent_button"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/correct"
+                    android:tint="@color/white"
+                    android:id="@+id/icon_complete"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save Task"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"
+                    android:textColor="@color/white"
+                    android:layout_toEndOf="@+id/icon_complete"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Your progress is your power."
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:textColor="#5C4037"
+                android:layout_toEndOf="@+id/icon_complete"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PREVIEW"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#5C4037"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Live Card"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/dark_orange"
+                    android:layout_alignParentEnd="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:background="@drawable/edittext_background"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Live Card"
+                    android:textSize="10sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/txt_category"
+                    android:background="@drawable/category_background"
+                    android:textColor="@color/category_blue"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Live Card"
+                    android:textSize="24sp"
+                    android:layout_below="@+id/txt_category"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:id="@+id/title"
+                    android:layout_marginTop="4dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:id="@+id/points"
+                    android:textColor="#5C4037"
+                    android:textSize="24sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PTS"
+                    android:textColor="#5C4037"
+                    android:textSize="10sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/points"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Reward: Relax in sauna"
+                    android:textColor="#5C4037"
+                    android:textSize="10sp"
+                    android:layout_marginVertical="16sp"
+                    android:drawableStart="@drawable/rewardbox"
+                    android:layout_below="@+id/title"
+                    android:layout_gravity="center"
+                    android:id="@+id/rewardtext"
+                    />
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:max="100"
+                    android:progress="35"
+                    android:layout_below="@+id/rewardtext"
+                    android:progressDrawable="@drawable/custom_progress_bar"
+                    android:indeterminate="false" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</FrameLayout>

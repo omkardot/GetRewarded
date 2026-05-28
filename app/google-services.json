@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "971428345435",
+    "project_id": "taskquest-e3408",
+    "storage_bucket": "taskquest-e3408.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971428345435:android:78e5cd972ac6dc949e717e",
+        "android_client_info": {
+          "package_name": "com.varram.taskquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971428345435-gur0s15q0iof20u5vicatsgi3rs83t1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.varram.taskquest",
+            "certificate_hash": "5453c1e1628d80ae7384bed0f810cbee9a82ad19"
+          }
+        },
+        {
+          "client_id": "971428345435-9orbqkjsrnjkm0cpccoi8iis3qriro9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbAlZVdXwU3VJLJgcdDDe9HVqpZkPIzu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971428345435-9orbqkjsrnjkm0cpccoi8iis3qriro9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

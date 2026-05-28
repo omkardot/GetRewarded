@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="light_blue_app_bar">#E2E8F0</color>
+    <color name="orange_defaulte">#EA580C</color>
+    <color name="dark_yello">#5C4037</color>
+    <color name="border_light">#E6BEB2</color>
+    <color name="dark_orange">#AA3000</color>
+    <color name="category_blue">#001A41</color>
+</resources>

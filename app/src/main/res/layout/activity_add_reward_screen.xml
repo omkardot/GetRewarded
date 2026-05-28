@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Reward Title -->
+    <EditText
+        android:id="@+id/etRewardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reward Name (e.g. Burger)" />
+
+    <!-- Required Points -->
+    <EditText
+        android:id="@+id/etRewardPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Required Points"
+        android:inputType="number" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSaveReward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Reward" />
+
+</LinearLayout>
