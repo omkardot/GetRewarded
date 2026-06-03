@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var ivTogglePassword: ImageView
     private lateinit var btnLogin: Button
     private lateinit var btnGoogle: Button
-    private lateinit var btnApple: Button
     private lateinit var tvForgotPassword: TextView
     private lateinit var tvSignUp: TextView
     private lateinit var tvTitle: TextView
@@ -64,7 +63,6 @@ class LoginActivity : AppCompatActivity() {
         ivTogglePassword = findViewById(R.id.ivTogglePassword)
         btnLogin         = findViewById(R.id.btnLogin)
         btnGoogle        = findViewById(R.id.btnGoogle)
-        btnApple         = findViewById(R.id.btnApple)
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
         tvSignUp         = findViewById(R.id.tvSignUp)
         tvTitle          = findViewById(R.id.tvTitle)
@@ -139,14 +137,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Google sign-in
         btnGoogle.setOnClickListener {
-            // TODO: Integrate Google Sign-In SDK
-            Toast.makeText(this, "Google sign-in coming soon", Toast.LENGTH_SHORT).show()
-        }
 
-        // Apple sign-in
-        btnApple.setOnClickListener {
-            // TODO: Integrate Apple Sign-In
-            Toast.makeText(this, "Apple sign-in coming soon", Toast.LENGTH_SHORT).show()
         }
 
         // Create account

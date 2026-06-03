@@ -8,7 +8,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -22,24 +25,25 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.varram.taskquest.GetRewaredApplication.Companion.db
 import com.varram.taskquest.Reciver.ReminderReceiver
 import com.varram.taskquest.adapters.MainPagerAdapter
 import com.varram.taskquest.adapters.TaskAdapter
 import com.varram.taskquest.data.local.TaskEntity
 import com.varram.taskquest.data.local.UserStatsEntity
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    companion object {
-        lateinit var db: AppDatabase
-    }
+
     private lateinit var tvPoints: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TaskAdapter
@@ -51,86 +55,82 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
-
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            onBackPressedMethod()
+        }
+    }
+    private fun onBackPressedMethod() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            finish()
+        }
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val MIGRATION_3_4 = object : Migration(5, 6) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    "ALTER TABLE tasks ADD COLUMN category TEXT NOT NULL DEFAULT 'Other'"
-                )
+        setContentView(R.layout.activity_main)
+        initView()
+
+    }
+
+    private fun initView() {
+        viewPager = findViewById(R.id.viewPager)
+        bottomNav = findViewById(R.id.bottomNav)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        val menuIcon = findViewById<ImageView>(R.id.menu_icon)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        menuIcon.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.itemIconTintList = null
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
+        val drawerHeader = navigationView.getHeaderView(0)
+        val username = drawerHeader.findViewById<TextView>(R.id.usrname)
+        val email = drawerHeader.findViewById<TextView>(R.id.usremail)
+        val profile_image = drawerHeader.findViewById<CircleImageView>(R.id.profileImg)
+
+
+
+//
+//        val userdata = dbHelper.getImageAndName()
+//        username.setText(userdata.first)
+//        val emailtext = dbHelper.getAllUsers()
+//        email.text = emailtext.get(0).email
+
+//        Glide.with(this@MainActivity)
+//            .asBitmap()
+//            .load(userdata.second)
+//            .placeholder(R.drawable.profilepicture)
+//            .into(profile_image)
+
+        //init ViewPager
+        val adapter = MainPagerAdapter(this)
+        viewPager.adapter = adapter
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.dashboard -> viewPager.currentItem = 0
+                R.id.rewards -> viewPager.currentItem = 1
+                R.id.tasks -> viewPager.currentItem = 2
+                R.id.stats -> viewPager.currentItem = 3
             }
+            true
         }
-        com.varram.taskquest.MainActivity.Companion.db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "task_db"
-        )
-            .addMigrations(MIGRATION_3_4)
-            .build()
-
-       /* setContentView(R.layout.activity_main)
-
-        recyclerView = findViewById(R.id.rvTasks)
-        btnAddTask = findViewById(R.id.btnAddTask)
-        btnViewRewards = findViewById(R.id.btnRewards)
-        tvStreak = findViewById(R.id.tvStreak)
-        tvPoints = findViewById(R.id.tvPoints)
-        adapter = TaskAdapter(emptyList()) { task ->
-            completeTask(task)
-        }
-        scheduleDailyReminder(this)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-
-        btnAddTask.setOnClickListener {
-            startActivity(Intent(this, AddTaskScreen::class.java))
-        }
-        btnViewRewards.setOnClickListener {
-            startActivity(Intent(this, RewardActivity::class.java))
-        }
-
-        observeTasks()
-        initStatsAndLoad()
-        loadStreak()
-        applyDailyPenaltyIfNeeded()*/
-
-            setContentView(R.layout.activity_main)
-            viewPager = findViewById(R.id.viewPager)
-            bottomNav = findViewById(R.id.bottomNav)
-            drawerLayout = findViewById(R.id.drawer_layout)
-            navView = findViewById(R.id.nav_view)
-
-        // Setup toggle
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close)
-        drawerLayout.addDrawerListener(toggle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toggle.syncState()
-
-        navView.setNavigationItemSelectedListener { /* handle */ true }
-            val adapter = MainPagerAdapter(this)
-            viewPager.adapter = adapter
-
-            bottomNav.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.dashboard -> viewPager.currentItem = 0
-                    R.id.rewards -> viewPager.currentItem = 1
-                    R.id.tasks -> viewPager.currentItem = 2
-                    R.id.stats -> viewPager.currentItem = 3
-                }
-                true
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                bottomNav.menu.getItem(position).isChecked = true
             }
-            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    bottomNav.menu.getItem(position).isChecked = true
-                }
-            })
-        }
+        })
+    }
+
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
     }
@@ -274,5 +274,27 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        item.isChecked = false
+
+        when (item.itemId) {
+            R.id.nav_profile -> {
+            }
+
+            R.id.nav_help -> {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            R.id.nav_savedPost -> {
+            }
+
+            R.id.nav_logout -> {
+            }
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 }

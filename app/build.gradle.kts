@@ -67,6 +67,12 @@ dependencies {
     // Ktor
     implementation("io.ktor:ktor-client-android:3.1.0")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.bumptech.glide:glide:5.0.5")
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.material:material:1.11.0")
+    implementation ("io.coil-kt:coil:2.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

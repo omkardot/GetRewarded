@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.R
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.adapters.RewardAdapter
@@ -44,7 +45,7 @@ class RewardsFragment : Fragment(R.layout.fragment_rewards) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val stats = MainActivity.db.userStatsDao().getStats()
+            val stats = GetRewaredApplication.db.userStatsDao().getStats()
 
             val points = stats?.totalPoints ?: 0
 
@@ -63,7 +64,7 @@ class RewardsFragment : Fragment(R.layout.fragment_rewards) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            MainActivity.db.rewardDao().getAllRewards().collect { list ->
+            GetRewaredApplication.db.rewardDao().getAllRewards().collect { list ->
                 rewardAdapter.updateData(list)
             }
         }
@@ -73,17 +74,17 @@ class RewardsFragment : Fragment(R.layout.fragment_rewards) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val stats = MainActivity.db.userStatsDao().getStats() ?: return@launch
+            val stats = GetRewaredApplication.db.userStatsDao().getStats() ?: return@launch
 
             if (stats.totalPoints >= reward.requiredPoints) {
 
-                MainActivity.db.userStatsDao().updateStats(
+                GetRewaredApplication.db.userStatsDao().updateStats(
                     stats.copy(
                         totalPoints = stats.totalPoints - reward.requiredPoints
                     )
                 )
 
-                MainActivity.db.rewardDao().updateReward(
+                GetRewaredApplication.db.rewardDao().updateReward(
                     reward.copy(isUnlocked = true)
                 )
 

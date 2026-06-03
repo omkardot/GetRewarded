@@ -15,6 +15,7 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.util.Patterns
 import android.widget.*
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -25,8 +26,16 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.varram.taskquest.GetRewaredApplication.Companion.db
 import com.varram.taskquest.Helpers.RewaredSharedPref
 import com.varram.taskquest.MainActivity
+import com.varram.taskquest.data.local.AppDatabase
+import com.varram.taskquest.data.local.UserDetails
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class RegisterUserActivity : AppCompatActivity() {
 
@@ -44,6 +53,7 @@ class RegisterUserActivity : AppCompatActivity() {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private var isPasswordVisible = false
+    private lateinit var dbHelper: AppDatabase
 
     private var RC_SIGN_IN: Int = 1001
     // ── Lifecycle ──────────────────────────────────────────────────────────
@@ -108,13 +118,32 @@ class RegisterUserActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 saveUserToFirestore(auth.currentUser, "google")
-//                insertDataToDB(auth.currentUser,"google")
+                insertDataToDB(auth.currentUser,"google")
             } else {
                 Toast.makeText(this,"Google login failed: ${task.exception?.message}",Toast.LENGTH_SHORT).show()
             }
         }
     }
     // ── Click Listeners ────────────────────────────────────────────────────
+
+    private fun insertDataToDB(user: FirebaseUser?, provider: String, displayName: String? = null) {
+        if (user == null) return
+
+        val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+        val userDetails = UserDetails(1,
+            user.displayName ?: displayName ?: "",
+            user.email ?: "",
+            user.uid,
+            "Y",
+            currentTime,
+            provider,
+            user.photoUrl?.toString() ?: "",
+            currentTime
+            )
+        lifecycleScope.launch(Dispatchers.IO) {
+            val inserted = db.userdetailsDao().insertUserDetails(userDetails)
+        }
+    }
     private fun setClickListeners() {
 
         // Password visibility toggle

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Radial gradient background mimicking the web design:
+     radial-gradient(circle at 50% 50%, #ffffff 0%, #fcf8f9 100%) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="200%p"
+        android:centerX="0.5"
+        android:centerY="0.5"
+        android:startColor="#FFFFFF"
+        android:endColor="#FCF8F9" />
+</shape>

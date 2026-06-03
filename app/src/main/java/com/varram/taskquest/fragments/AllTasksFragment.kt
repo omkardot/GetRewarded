@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.adapters.TaskAdapter
@@ -35,7 +36,7 @@ class AllTasksFragment : Fragment(R.layout.fragment_all_tasks) {
 
     private fun loadTasks() {
         viewLifecycleOwner.lifecycleScope.launch {
-            MainActivity.db.taskDao().getAllTasks().collect {
+            GetRewaredApplication.db.taskDao().getAllTasks().collect {
                 adapter.updateData(it)
             }
         }
@@ -46,14 +47,14 @@ class AllTasksFragment : Fragment(R.layout.fragment_all_tasks) {
 
             if (!task.isCompleted) {
 
-                MainActivity.db.taskDao().updateTask(
+                GetRewaredApplication.db.taskDao().updateTask(
                     task.copy(isCompleted = true)
                 )
 
-                val stats = MainActivity.db.userStatsDao().getStats()
+                val stats = GetRewaredApplication.db.userStatsDao().getStats()
 
                 stats?.let {
-                    MainActivity.db.userStatsDao().updateStats(
+                    GetRewaredApplication.db.userStatsDao().updateStats(
                         it.copy(totalPoints = it.totalPoints + task.points)
                     )
                 }
