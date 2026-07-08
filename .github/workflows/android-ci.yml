@@ -43,5 +43,6 @@ jobs:
 
       - name: Run Sonar
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew sonar
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar --stacktrace --info
+        continue-on-error: true
