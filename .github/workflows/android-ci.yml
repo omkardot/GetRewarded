@@ -43,5 +43,5 @@ jobs:
 
       - name: Run Sonar
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ 23faaf622c0bb062896cbfce87b3dc3be362a40a }}
         run: ./gradlew sonar
