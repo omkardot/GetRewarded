@@ -98,16 +98,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 //
-//        val userdata = dbHelper.getImageAndName()
-//        username.setText(userdata.first)
-//        val emailtext = dbHelper.getAllUsers()
-//        email.text = emailtext.get(0).email
+        lifecycleScope.launch {
 
-//        Glide.with(this@MainActivity)
-//            .asBitmap()
-//            .load(userdata.second)
-//            .placeholder(R.drawable.profilepicture)
-//            .into(profile_image)
+            val userData = db.userdetailsDao().getuserdetails()
+
+            userData?.let {
+
+                username.text = it.username
+                email.text = it.useremail
+
+                Glide.with(this@MainActivity)
+                    .load(it.profileUrl)
+                    .placeholder(R.drawable.profile_icon)
+                    .into(profile_image)
+            }
+        }
 
         //init ViewPager
         val adapter = MainPagerAdapter(this)

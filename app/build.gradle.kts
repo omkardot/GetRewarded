@@ -2,9 +2,29 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    id("org.sonarqube") version "6.2.0.5505"
     id("com.google.gms.google-services")
 }
+sonar {
 
+    properties {
+
+        property(
+            "sonar.projectKey",
+            "omkardot_GetRewarded"
+        )
+
+        property(
+            "sonar.organization",
+            "omkardot"
+        )
+
+        property(
+            "sonar.host.url",
+            "https://sonarcloud.io"
+        )
+    }
+}
 android {
     namespace = "com.varram.taskquest"
     compileSdk = 35

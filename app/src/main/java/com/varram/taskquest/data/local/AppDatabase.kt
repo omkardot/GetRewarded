@@ -2,7 +2,6 @@ package com.varram.taskquest.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.google.firebase.firestore.auth.User
 import com.varram.taskquest.data.dao.RewardDao
 import com.varram.taskquest.data.dao.TaskDao
 import com.varram.taskquest.data.dao.UserDetailsDao

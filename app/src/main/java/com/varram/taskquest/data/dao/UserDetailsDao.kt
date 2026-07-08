@@ -16,4 +16,7 @@ interface UserDetailsDao {
 
     @Update
     suspend fun updateUserDetials(task: UserDetails)
+
+    @Query("SELECT * FROM userdetails")
+    suspend fun getuserdetails():UserDetails?
 }
