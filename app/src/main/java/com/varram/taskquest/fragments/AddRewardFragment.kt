@@ -61,14 +61,17 @@ class AddRewardFragment : Fragment(R.layout.fragment_add_rewards) {
                 start: Int,
                 count: Int,
                 after: Int
-            ) {}
-
+            ) {
+// comment explaining why the method is empty
+            }
             override fun onTextChanged(
                 s: CharSequence?,
                 start: Int,
                 before: Int,
                 count: Int
-            ) {}
+            ) {
+// comment explaining why the method is empty
+            }
         }
 
         etRewardName.addTextChangedListener(watcher)
