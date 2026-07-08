@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.data.local.RewardEntity
@@ -47,7 +48,7 @@ class AddRewardActivity : AppCompatActivity() {
         )
 
         lifecycleScope.launch {
-            MainActivity.db.rewardDao().insertReward(reward)
+            GetRewaredApplication.db.rewardDao().insertReward(reward)
 
             runOnUiThread {
                 Toast.makeText(this@AddRewardActivity, "Reward Saved", Toast.LENGTH_SHORT).show()
