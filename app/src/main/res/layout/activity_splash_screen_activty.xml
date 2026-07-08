@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_splash.xml
+    Mirrors the HTML design:
+      - Radial warm-white background
+      - Ambient blurred blobs (top-right, bottom-left)
+      - Centered: rounded logo → app name (gradient) → shimmer divider
+      - Bottom: tagline → loading dots → CTA button → version label
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:fitsSystemWindows="false">
+
+    <!-- ── Ambient blobs (decorative blurred circles) ── -->
+    <!-- Top-right ambient (primary/5 ≈ 5% primary) -->
+    <View
+        android:id="@+id/blob_top_right"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:alpha="0.08"
+        android:background="@drawable/blob_circle_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="-60dp"
+        android:layout_marginTop="-60dp" />
+
+    <!-- Bottom-left ambient (secondary/5 ≈ 5% secondary) -->
+    <View
+        android:id="@+id/blob_bottom_left"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:alpha="0.06"
+        android:background="@drawable/blob_circle_secondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="-60dp"
+        android:layout_marginBottom="-60dp" />
+
+    <!-- ── Identity cluster (Logo + Name + Divider) ── -->
+    <LinearLayout
+        android:id="@+id/identity_cluster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:alpha="0"
+        android:translationY="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/footer_cluster"
+        app:layout_constraintVertical_bias="0.5">
+
+        <!-- Logo container: white card with large rounded corners + shadow -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logo_container"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="16dp"
+            app:cardBackgroundColor="@color/surface_container_lowest">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/logo_content_description"
+                android:scaleType="centerCrop"
+                android:padding="4dp"
+                android:src="@drawable/applogo"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- App name: italic bold, gradient via shader -->
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/app_name"
+            android:textSize="48sp"
+            android:fontFamily="@font/lexend"
+            android:textStyle="bold|italic"
+            android:letterSpacing="-0.02"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            tools:text="GetRewarded" />
+
+        <!-- Shimmer accent divider line -->
+        <View
+            android:id="@+id/divider_line"
+            android:layout_width="64dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/divider_shimmer" />
+
+    </LinearLayout>
+
+    <!-- ── Footer cluster (Tagline + Dots + CTA + Version) ── -->
+    <LinearLayout
+        android:id="@+id/footer_cluster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="48dp"
+        android:alpha="0"
+        android:translationY="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Tagline -->
+        <TextView
+            android:id="@+id/tv_tagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_tagline"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@color/on_surface_variant"
+            android:gravity="center"
+            android:maxWidth="280dp" />
+
+        <!-- Loading dots row -->
+        <LinearLayout
+            android:id="@+id/loading_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/dot_1"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/dot_loading"
+                android:alpha="0.3"
+                android:layout_marginEnd="6dp" />
+
+            <View
+                android:id="@+id/dot_2"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/dot_loading"
+                android:alpha="0.6"
+                android:layout_marginEnd="6dp" />
+
+            <View
+                android:id="@+id/dot_3"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/dot_loading"
+                android:alpha="1.0" />
+
+        </LinearLayout>
+
+        <!-- CTA Button: "START YOUR FLOW" -->
+
+        <!-- Version label -->
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/splash_version"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/outline"
+            android:alpha="0.4" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

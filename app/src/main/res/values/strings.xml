@@ -6,4 +6,8 @@
     <string name="nav_close">close</string>
     <string name="smaller_rewards_txt">Smaller rewards (200-500 pts) keep\nmomentum high between big milestones.</string>
     <string name="default_web_client_id">268370175580-ag69ifqrei24umhalbodsgulaur43tn6.apps.googleusercontent.com</string>
+    <string name="splash_tagline">TURN DISCIPLINE INTO REWARDS.</string>
+    <string name="splash_cta">START YOUR FLOW</string>
+    <string name="splash_version">v2.4.0 High-Octane Edition</string>
+    <string name="logo_content_description">GetRewarded App Logo</string>
 </resources>

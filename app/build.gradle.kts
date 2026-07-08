@@ -2,9 +2,29 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    id("org.sonarqube") version "6.2.0.5505"
     id("com.google.gms.google-services")
 }
+sonar {
 
+    properties {
+
+        property(
+            "sonar.projectKey",
+            "omkardot_GetRewarded"
+        )
+
+        property(
+            "sonar.organization",
+            "omkardot"
+        )
+
+        property(
+            "sonar.host.url",
+            "https://sonarcloud.io"
+        )
+    }
+}
 android {
     namespace = "com.varram.taskquest"
     compileSdk = 35
@@ -20,6 +40,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -67,6 +91,12 @@ dependencies {
     // Ktor
     implementation("io.ktor:ktor-client-android:3.1.0")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.bumptech.glide:glide:5.0.5")
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.material:material:1.11.0")
+    implementation ("io.coil-kt:coil:2.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

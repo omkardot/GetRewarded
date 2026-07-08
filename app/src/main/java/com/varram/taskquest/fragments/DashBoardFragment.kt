@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.adapters.TaskAdapter
@@ -73,7 +74,7 @@ class DashBoardFragment : Fragment(R.layout.fragment_stats) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val stats = MainActivity.db.userStatsDao().getStats()
+            val stats = GetRewaredApplication.db.userStatsDao().getStats()
 
             if (stats != null) {
 
@@ -100,7 +101,7 @@ class DashBoardFragment : Fragment(R.layout.fragment_stats) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            MainActivity.db.taskDao().getAllTasks().collect { list ->
+            GetRewaredApplication.db.taskDao().getAllTasks().collect { list ->
 
                 val todayList =
                     list.filter {
@@ -122,11 +123,11 @@ class DashBoardFragment : Fragment(R.layout.fragment_stats) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            MainActivity.db.taskDao().updateTask(
+            GetRewaredApplication.db.taskDao().updateTask(
                 task.copy(isCompleted = true)
             )
 
-            val stats = MainActivity.db.userStatsDao().getStats()
+            val stats = GetRewaredApplication.db.userStatsDao().getStats()
 
             stats?.let {
 

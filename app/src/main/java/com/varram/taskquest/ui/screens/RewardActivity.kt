@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.adapters.RewardAdapter
@@ -45,7 +46,7 @@ class RewardActivity : AppCompatActivity() {
 
     private fun observeRewards() {
         lifecycleScope.launch {
-            MainActivity.db.rewardDao().getAllRewards().collect { rewards ->
+            GetRewaredApplication.db.rewardDao().getAllRewards().collect { rewards ->
                 adapter.updateData(rewards)
             }
         }
@@ -53,7 +54,7 @@ class RewardActivity : AppCompatActivity() {
 
     private fun loadPoints() {
         lifecycleScope.launch {
-            val stats = MainActivity.db.userStatsDao().getStats()
+            val stats = GetRewaredApplication.db.userStatsDao().getStats()
             runOnUiThread {
                 tvPoints.text = "Points: ${stats?.totalPoints ?: 0}"
             }
@@ -63,7 +64,7 @@ class RewardActivity : AppCompatActivity() {
     private fun unlockReward(reward: RewardEntity) {
         lifecycleScope.launch {
 
-            val stats = MainActivity.db.userStatsDao().getStats() ?: return@launch
+            val stats = GetRewaredApplication.db.userStatsDao().getStats() ?: return@launch
 
             if (stats.totalPoints < reward.requiredPoints) {
                 runOnUiThread {
@@ -73,9 +74,9 @@ class RewardActivity : AppCompatActivity() {
             }
 
             val newPoints = stats.totalPoints - reward.requiredPoints
-            MainActivity.db.userStatsDao().updateStats(stats.copy(totalPoints = newPoints))
+            GetRewaredApplication.db.userStatsDao().updateStats(stats.copy(totalPoints = newPoints))
 
-            MainActivity.db.rewardDao().updateReward(reward.copy(isUnlocked = true))
+            GetRewaredApplication.db.rewardDao().updateReward(reward.copy(isUnlocked = true))
 
             loadPoints()
 

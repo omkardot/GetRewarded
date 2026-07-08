@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.lifecycleScope
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.data.local.TaskEntity
@@ -156,7 +157,7 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
 
             lifecycleScope.launch {
 
-                MainActivity.db.taskDao().insertTask(task)
+                GetRewaredApplication.db.taskDao().insertTask(task)
 
                 toast("Task Saved")
 

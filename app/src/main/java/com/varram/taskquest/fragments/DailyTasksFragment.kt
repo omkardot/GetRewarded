@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.adapters.TaskAdapter
@@ -35,7 +36,7 @@ class DailyTasksFragment : Fragment(R.layout.fragment_daily_tasks) {
 
     private fun loadTasks() {
         viewLifecycleOwner.lifecycleScope.launch {
-            MainActivity.db.taskDao().getAllTasks().collect { list ->
+            GetRewaredApplication.db.taskDao().getAllTasks().collect { list ->
                 adapter.updateData(list.filter { it.isDaily && !it.isCompleted })
             }
         }
@@ -44,7 +45,7 @@ class DailyTasksFragment : Fragment(R.layout.fragment_daily_tasks) {
     private fun completeTask(task: TaskEntity) {
         viewLifecycleOwner.lifecycleScope.launch {
 
-            MainActivity.db.taskDao().updateTask(
+            GetRewaredApplication.db.taskDao().updateTask(
                 task.copy(isCompleted = true)
             )
         }

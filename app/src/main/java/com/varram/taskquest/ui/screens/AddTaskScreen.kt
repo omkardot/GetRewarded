@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.varram.taskquest.GetRewaredApplication
 import com.varram.taskquest.MainActivity
 import com.varram.taskquest.R
 import com.varram.taskquest.data.local.TaskEntity
@@ -56,7 +57,7 @@ class AddTaskScreen : AppCompatActivity() {
 
         // Insert into DB
         lifecycleScope.launch {
-            MainActivity.db.taskDao().insertTask(task)
+            GetRewaredApplication.db.taskDao().insertTask(task)
 
             runOnUiThread {
                 Toast.makeText(this@AddTaskScreen, "Task Saved", Toast.LENGTH_SHORT).show()

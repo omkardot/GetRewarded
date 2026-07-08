@@ -217,7 +217,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2"
+            android:weightSum="1"
             android:layout_marginBottom="32dp">
 
             <!-- Google Button -->
@@ -228,28 +228,13 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:text="GOOGLE"
-                android:textColor="#333333"
+                android:textColor="#ffffff"
                 android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"
                 android:drawablePadding="6dp"
                 android:background="@drawable/bg_button_outline"
                 android:stateListAnimator="@null" />
 
-            <!-- Apple Button -->
-            <Button
-                android:id="@+id/btnApple"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="APPLE"
-                android:textColor="#333333"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif-medium"
-                android:drawableStart="@drawable/ic_apple"
-                android:drawablePadding="6dp"
-                android:background="@drawable/bg_button_outline"
-                android:stateListAnimator="@null" />
         </LinearLayout>
 
         <!-- Sign Up -->
